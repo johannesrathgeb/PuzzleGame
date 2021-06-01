@@ -46,13 +46,15 @@ import {MatTreeModule} from '@angular/material/tree';
 import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { HighscoreComponent } from './highscore/highscore.component';
+import { PuzzleComponent } from './puzzle/puzzle.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    HighscoreComponent
+    HighscoreComponent,
+    PuzzleComponent
   ],
   imports: [
     BrowserModule,

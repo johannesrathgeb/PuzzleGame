@@ -4,11 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
 import { HighscoreComponent } from './highscore/highscore.component';
+import { PuzzleComponent } from './puzzle/puzzle.component';
 
 const routes: Routes = [
 {path: 'login', component: LoginComponent},
 {path: 'signup', component: SignupComponent},
-{path: 'highscore', component: HighscoreComponent}
+{path: 'highscore', component: HighscoreComponent},
+{path: 'puzzle', component: PuzzleComponent}
 ];
 
 @NgModule({
