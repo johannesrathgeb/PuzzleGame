@@ -1,0 +1,41 @@
+<form class="example-form"  (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+    <mat-form-field appearance="fill" class ="example-full-width">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" required name="email" ngModel #emailInput ="ngModel">
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class ="example-full-width">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" required name="password" ngModel #passwordInput ="ngModel">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class ="example-full-width">
+        <mat-label>Repeat your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" required name="repeatpassword" ngModel #repeatpasswordInput ="ngModel">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class ="example-full-width">
+        <mat-label>Firma</mat-label>
+        <input matInput type="text" value="FH Technikum Wien" readonly >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class ="example-full-width">
+        <mat-label>Postleitzahl</mat-label>
+        <input matInput type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class ="example-full-width">
+        <mat-label>Adresse</mat-label>
+        <textarea matInput name="address"></textarea>
+    </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Sign Up</button>
+</form>
+
+<div id="msg"></div>
