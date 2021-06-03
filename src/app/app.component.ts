@@ -15,6 +15,7 @@ export class AppComponent {
   constructor(private http: HttpClient) { }
 
   logout(){
+    console.log("Teeeeeeest")
     this.http.post<{ message: string }>('http://localhost:3000/logout', localStorage.getItem('ftoken'), this.httpOptions)
       .subscribe((responseData) => {
        console.log(responseData.message);
@@ -44,8 +45,12 @@ export class AppComponent {
   handleButtons() {
     if(sessionStorage.getItem('autcheck') == "1") {
       document.getElementById('bsignup').style.visibility = 'hidden';
+      document.getElementById('blogin').style.visibility = 'hidden';
+      document.getElementById('blogout').style.visibility = 'visible';
     } else {
       document.getElementById('bsignup').style.visibility = 'visible';
+      document.getElementById('blogin').style.visibility = 'visible';
+      document.getElementById('blogout').style.visibility = 'hidden';
     }
     sessionStorage.removeItem('autcheck');
   }

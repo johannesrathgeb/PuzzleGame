@@ -9,8 +9,9 @@ export class PuzzleComponent implements OnInit {
 
   constructor() { }
   riddle = document.createElement("div");
+  seconds = 0;
   ngOnInit(): void {
- 
+    
     this.riddle.id = "riddle";
 
     var riddlecontainer = document.getElementById('riddlecontainer');
@@ -55,8 +56,17 @@ export class PuzzleComponent implements OnInit {
       this.riddle.appendChild(img);
     }
   }
-  
-  
+  //Pfusch
+  timer(){
+      if(this.isSolved() != true){
+          this.seconds++;	
+          document.getElementById('time').innerHTML = this.seconds;
+          window.setTimeout("timer()",1000);
+      }
+      else{
+          //Timer stoppt
+      }
+  }
   shufflePuzzleParts() {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let counter = puzzleParts.length;

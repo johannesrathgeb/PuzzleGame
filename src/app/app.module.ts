@@ -47,6 +47,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { HighscoreComponent } from './highscore/highscore.component';
 import { PuzzleComponent } from './puzzle/puzzle.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { PuzzleComponent } from './puzzle/puzzle.component';
     LoginComponent,
     SignupComponent,
     HighscoreComponent,
-    PuzzleComponent
+    PuzzleComponent,
+    ProfileComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
