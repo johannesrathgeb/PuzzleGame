@@ -18,7 +18,7 @@ export class PuzzleComponent implements OnInit {
     riddlecontainer.appendChild(this.riddle);
 
     const puzzlePartsIdx = this.shufflePuzzleParts();
-
+    this.timer(); 
     for (let i = 0; i < puzzlePartsIdx.length; i++) {
       const img = document.createElement("img");
       const imgId = "part" + puzzlePartsIdx[i];
@@ -57,16 +57,33 @@ export class PuzzleComponent implements OnInit {
     }
   }
   //Pfusch
-  timer(){
+  
+  timer() {
+      console.log("fasoifhiusofuisadohfouaisdf");
+      document.getElementById('time').innerHTML = "hdioausfhoisufhas";
       if(this.isSolved() != true){
           this.seconds++;	
-          document.getElementById('time').innerHTML = this.seconds;
-          window.setTimeout("timer()",1000);
+          console.log("zähl hoch oida");
+          //var riddlecontainer = document.getElementById('riddlecontainer');
+          //riddlecontainer.appendChild(this.riddle);
+
+          //var timecontainer = document.getElementById('time').innerHTML;
+
+          var timeDiv = document.createElement("div");
+          var timeText = document.createTextNode("dfhjdiufhaosfuadioshiouhoi");
+          timeDiv.appendChild(timeText);
+          document.getElementById('time').appendChild(timeDiv);
+          //setTimeout('timer',1000);
       }
       else{
-          //Timer stoppt
+          console.log("solved is true");
+
+          //setTimeout('timer()',1000);
+         
       }
   }
+
+  
   shufflePuzzleParts() {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let counter = puzzleParts.length;
