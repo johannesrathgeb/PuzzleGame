@@ -12,14 +12,16 @@ export class PuzzleComponent implements OnInit {
   ngOnInit(): void {
  
     this.riddle.id = "riddle";
-    document.body.appendChild(this.riddle);
+
+    var riddlecontainer = document.getElementById('riddlecontainer');
+    riddlecontainer.appendChild(this.riddle);
 
     const puzzlePartsIdx = this.shufflePuzzleParts();
 
     for (let i = 0; i < puzzlePartsIdx.length; i++) {
       const img = document.createElement("img");
       const imgId = "part" + puzzlePartsIdx[i];
-    
+      
       img.setAttribute("src", "assets/img/img" + puzzlePartsIdx[i] + ".jpg");
       img.setAttribute("alt", imgId);
       img.setAttribute("id", imgId);

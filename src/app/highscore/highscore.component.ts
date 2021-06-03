@@ -17,7 +17,7 @@ export class HighscoreComponent implements OnInit {
   constructor(private http: HttpClient, public router: Router) { }
 
   ngOnInit(): void {
-    this.http.post<{ authenticated: boolean }>('http://localhost:3000/authenticator/', sessionStorage.getItem('ftoken'), this.httpOptions)
+    this.http.post<{ authenticated: boolean }>('http://localhost:3000/authenticator/', localStorage.getItem('ftoken'), this.httpOptions)
       .subscribe((responseData) => {
         if(responseData.authenticated == false){
           console.log("yalla, raus in die Highscore Bücher");
@@ -26,9 +26,10 @@ export class HighscoreComponent implements OnInit {
       });
   }
 
+
   addHighscore(){
     console.log("function called");
-    this.http.post<{ message: string }>('http://localhost:3000/highscore', sessionStorage.getItem('ftoken'), this.httpOptions)
+    this.http.post<{ message: string }>('http://localhost:3000/highscore', localStorage.getItem('ftoken'), this.httpOptions)
       .subscribe((responseData) => {
        console.log(responseData.message);
       });

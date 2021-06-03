@@ -52,7 +52,7 @@ app.post('/login', (req, res, next) => {
     for(var i = 0; i < db.length; i++){
         dbData = db[i];
         if(loginData.email === dbData.email){
-            console.log("existed");
+            //console.log("existed");
             userExists = true;
             if(loginData.password === dbData.password){
                 loginUser=true;
@@ -62,7 +62,7 @@ app.post('/login', (req, res, next) => {
                 btoken = crypto.randomBytes(20).toString('hex');
                 dbData.btoken = btoken;
                 db[i] = dbData;
-                console.log(db[i]);
+                //console.log(db[i]);
             }
         }
     }
@@ -92,20 +92,19 @@ app.post('/login', (req, res, next) => {
 //signup post
 app.post('/signup', (req, res, next) => {
     const signupData = req.body;
-    console.log(signupData);
+   
 
     let exists = false;
 
     
     let dbData = [];
     for(var i = 0; i < db.length; i++){
-        console.log(i);
+       
         dbData = db[i];
-        console.log(signupData.email);
-        console.log(dbData.email);
+       
 
         if(signupData.email=== dbData.email){
-            console.log("existed");
+            //console.log("existed");
             exists = true;
         }
     }
@@ -117,10 +116,10 @@ app.post('/signup', (req, res, next) => {
         });
     }
     else{
-        var crypto = require("crypto");
-        btoken = crypto.randomBytes(20).toString('hex');
-        console.log("Token creation " + btoken);
-        signupData["btoken"] = btoken;
+        //var crypto = require("crypto");
+        //btoken = crypto.randomBytes(20).toString('hex');
+        //console.log("Token creation " + btoken);
+        signupData["btoken"] = " ";
         signupData["highscore"] = "0";
         db.push(signupData);
         console.log(db);
@@ -133,17 +132,25 @@ app.post('/signup', (req, res, next) => {
 //Authenticator
 app.post('/authenticator', (req, res, next) => {
     let ftoken = req.body.ftoken;
+
+    if(ftoken == null) {
+        res.status(200).json({
+            authenticated: false
+        });
+        return; 
+    }
+
     let confirmToken = false;
-    console.log(ftoken);
+    //console.log(ftoken);
     for(let i = 0; i < db.length; i++){
         dbData = db[i];
         if(dbData.btoken == ftoken){
             confirmToken = true;
-            console.log("jawohl hackerman");
+            //console.log("jawohl hackerman");
         }
     }
         if(confirmToken == true){
-            console.log("sameee");
+            //console.log("sameee");
             res.status(200).json({
                 authenticated: true
             });
@@ -156,7 +163,7 @@ app.post('/authenticator', (req, res, next) => {
 });
 
 app.post('/highscore', (req, res, next) =>{
-    console.log("travel");
+    //console.log("travel");
     let ftoken = req.body.ftoken;
 
     let userFound = false;
@@ -168,9 +175,9 @@ app.post('/highscore', (req, res, next) =>{
             userFound = true;
 
             dbData.highscore =  "1234";
-            console.log(dbData);
+            //console.log(dbData);
             db[i] = dbData;
-            console.log(db[i]);
+            //console.log(db[i]);
         }
     }
     if(userFound == true){
@@ -187,9 +194,9 @@ app.post('/logout', (req, res, next) => {
         btoken = dbData.btoken;
         if(btoken == ftoken){
             dbData.btoken = " ";
-            console.log(dbData);
+            //console.log(dbData);
             db[i] = dbData;
-            console.log(db[i]);
+            //console.log(db[i]);
         }
     }
     res.status(200).json({

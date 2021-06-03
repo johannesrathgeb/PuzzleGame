@@ -21,13 +21,45 @@ export class SignupComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
   
+  /*
+  tokenAuthenticator(){
+    this.http.post<{ authenticated: boolean }>('http://localhost:3000/authenticator/', localStorage.getItem('ftoken'), this.httpOptions)
+      .subscribe((responseData) => {
+        
+        console.log("||||||||");
+        console.log(responseData.authenticated);
+        console.log("||||||||");
+        if(responseData.authenticated == true) {
+          sessionStorage.setItem('autcheck', "1");
+        } else {
+          sessionStorage.setItem('autcheck', "0");
+        }
+      });
+  }
 
+
+  ngOnInit(): void {
+    console.log("page gewechselt");
+    this.tokenAuthenticator(); 
+    if(sessionStorage.getItem('autcheck') == "1") {
+      console.log("1!");
+      document.getElementById('blogin').style.visibility = 'hidden';
+      document.getElementById('blogout').style.visibility = 'visible';
+    } else {
+      console.log("2!");
+      document.getElementById('blogin').style.visibility = 'visible';
+      document.getElementById('blogout').style.visibility = 'hidden';
+    }
+    sessionStorage.removeItem('autcheck');
+  }
+  */
   ngOnInit(): void {
   }
 
+
   onSubmit(form: NgForm){
      
-    console.log(sessionStorage.getItem('ftoken'));
+    console.log(localStorage.getItem('ftoken'));
     if(form.value.password != form.value.repeatpassword){
       console.log("Passwörter stimmen nicht überein!");
     }

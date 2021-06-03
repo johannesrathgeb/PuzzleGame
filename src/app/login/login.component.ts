@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { $ } from 'protractor';
+import { AppComponent } from '../app.component';
 //import { timingSafeEqual } from 'crypto';
 
 
@@ -24,10 +26,17 @@ export class LoginComponent implements OnInit {
   
 
   tokenAuthenticator(){
-    this.http.post<{ authenticated: boolean }>('http://localhost:3000/authenticator/', sessionStorage.getItem('ftoken'), this.httpOptions)
+    this.http.post<{ authenticated: boolean }>('http://localhost:3000/authenticator/', localStorage.getItem('ftoken'), this.httpOptions)
       .subscribe((responseData) => {
-        if(responseData.authenticated == true){
-          console.log("yalla, rein in die Highscore Bücher");
+       
+        if(responseData.authenticated == true) {
+          sessionStorage.setItem('autcheck', "1");
+        } else {
+          sessionStorage.setItem('autcheck', "0");
+        }
+
+        if(sessionStorage.getItem('autcheck') == "1") {
+          this.handleButtons();
           this.router.navigate(['highscore']);
         }
       });
@@ -35,6 +44,18 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log("page gewechselt");
+    this.tokenAuthenticator(); 
+    this.handleButtons(); 
+  }
+
+  handleButtons() {
+    if(sessionStorage.getItem('autcheck') == "1") {
+      document.getElementById('bsignup').style.visibility = 'hidden';
+    } else {
+      document.getElementById('bsignup').style.visibility = 'visible';
+    }
+    sessionStorage.removeItem('autcheck');
   }
 
   onSubmit(form: NgForm){
@@ -45,8 +66,10 @@ export class LoginComponent implements OnInit {
           console.log(responseData.token);
           var tokenToJson = '{"ftoken":"' + responseData.token + '"}';
           console.log(tokenToJson);
-          sessionStorage.setItem('ftoken', tokenToJson);
+          localStorage.setItem('ftoken', tokenToJson);
+          
           this.tokenAuthenticator();
+          
         }
       });
   }
