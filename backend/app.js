@@ -11,9 +11,21 @@ app.use(express.urlencoded({
     extended: false
 }));
 
-var db = [];
+var db = [  
+    {email: 'test@test.gg',password: '11111111',repeatpassword: '111111111',btoken: ' ',highscore: '10'},
+    {email: 'webfr@superfach.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '39'},
+    {email: 'cheater@superscore.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '80'},
+    {email: 'user1@user1.com',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '0'},
+    {email: 'heidissche@obaihuckdoundmochweb.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '29'},
+    {email: 'berchdsgodnabier@gmail.com',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '36'},
+    {email: 'aram@bestgamemode.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '45'},
+    {email: 'removeyuumi@markyetter.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '87'},
+    {email: 'summersplash@hinigsbett.it',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '13'},
+    {email: 'uweuweosas@saugmeinboden.de',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '69'},
+    {email: 'legalizesibis@inaustria.de',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '69'}
+];
 var btoken = "";
-var currentBtoken ="";
+//var currentBtoken ="";
 
 //SIMPLE GET
 app.get('/', (req, res, next) => {
@@ -21,13 +33,16 @@ app.get('/', (req, res, next) => {
 });
 //Highscore GET
 app.get('/highscore', (req, res, next) =>{
+    
+    ftoken = req.query.token
+
     let returnHighscore;
     let returnUsername;
     for(let i = 0; i < db.length; i++){
         dbData = db[i];
         btoken = dbData.btoken;
 
-        if(btoken == currentBtoken){
+        if(btoken == ftoken){
             userFound = true;
             returnHighscore = dbData.highscore;
             returnUsername = dbData.email;
@@ -41,6 +56,29 @@ app.get('/highscore', (req, res, next) =>{
     
     //Werte abrufen
 });
+
+app.get('/allhighscores', (req, res, next) =>{
+    
+    ftoken = req.query.token
+
+    let returnHighscore;
+    let returnUsername;
+    for(let i = 0; i < db.length; i++){
+        dbData = db[i];
+        btoken = dbData.btoken;
+
+        if(btoken == ftoken){
+            userFound = true;
+        }
+    }
+
+    res.status(200).json({
+        db: db
+    });
+    
+    //Werte abrufen
+});
+
 
 //login post
 app.post('/login', (req, res, next) => {
@@ -68,7 +106,7 @@ app.post('/login', (req, res, next) => {
     }
 
     if(loginUser == true){
-       currentBtoken = btoken;
+       //currentBtoken = btoken;
         res.status(200).json({
             message: 'Login erfolgreich',
             
@@ -163,9 +201,18 @@ app.post('/authenticator', (req, res, next) => {
 });
 
 app.post('/highscore', (req, res, next) =>{
-    //console.log("travel");
+    console.log("travel");
+
     let ftoken = req.body.ftoken;
 
+    if(ftoken == null) {
+        res.status(200).json({
+           message: 'Einloggen um Highscore zu speichern'
+        });
+        return; 
+    }
+
+    let zeit = req.body.zeit; 
     let userFound = false;
     for(let i = 0; i < db.length; i++){
         dbData = db[i];
@@ -173,8 +220,22 @@ app.post('/highscore', (req, res, next) =>{
 
         if(btoken == ftoken){
             userFound = true;
-
-            dbData.highscore =  "1234";
+            console.log("öööööööööö");
+            console.log(zeit);
+            if(zeit <= 100) {
+                if(100 - zeit > dbData.highscore) {
+                    dbData.highscore = "100" - zeit;
+                } else {
+                    console.log("holy shit bist du longsom");
+                }
+            } else {
+                if( 0 >= dbData.highscore) {
+                    dbData.highscore = "0";
+                }
+                
+            }
+            
+            //console.log(dbData);
             //console.log(dbData);
             db[i] = dbData;
             //console.log(db[i]);

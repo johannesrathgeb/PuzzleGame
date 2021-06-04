@@ -54,10 +54,14 @@ export class LoginComponent implements OnInit {
       document.getElementById('bsignup').style.visibility = 'hidden';
       document.getElementById('blogin').style.visibility = 'hidden';
       document.getElementById('blogout').style.visibility = 'visible';
+      document.getElementById('bprofile').style.visibility = 'visible';
+      document.getElementById('bhighscore').style.visibility = 'visible';
     } else {
       document.getElementById('bsignup').style.visibility = 'visible';
       document.getElementById('blogin').style.visibility = 'visible';
       document.getElementById('blogout').style.visibility = 'hidden';
+      document.getElementById('bprofile').style.visibility = 'hidden';
+      document.getElementById('bhighscore').style.visibility = 'hidden';
     }
     sessionStorage.removeItem('autcheck');
   }

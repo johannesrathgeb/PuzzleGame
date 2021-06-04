@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PuzzleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
   riddle = document.createElement("div");
-  seconds = 0;
+  seconds = -1;
+  irgndav = false; 
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  };
+
+
   ngOnInit(): void {
     
     this.riddle.id = "riddle";
@@ -19,6 +27,8 @@ export class PuzzleComponent implements OnInit {
 
     const puzzlePartsIdx = this.shufflePuzzleParts();
     this.timer(); 
+
+
     for (let i = 0; i < puzzlePartsIdx.length; i++) {
       const img = document.createElement("img");
       const imgId = "part" + puzzlePartsIdx[i];
@@ -59,31 +69,35 @@ export class PuzzleComponent implements OnInit {
   //Pfusch
   
   timer() {
-      console.log("fasoifhiusofuisadohfouaisdf");
-      document.getElementById('time').innerHTML = "hdioausfhoisufhas";
-      if(this.isSolved() != true){
-          this.seconds++;	
-          console.log("zähl hoch oida");
-          //var riddlecontainer = document.getElementById('riddlecontainer');
-          //riddlecontainer.appendChild(this.riddle);
-
-          //var timecontainer = document.getElementById('time').innerHTML;
-
-          var timeDiv = document.createElement("div");
-          var timeText = document.createTextNode("dfhjdiufhaosfuadioshiouhoi");
-          timeDiv.appendChild(timeText);
-          document.getElementById('time').appendChild(timeDiv);
-          //setTimeout('timer',1000);
-      }
-      else{
-          console.log("solved is true");
-
-          //setTimeout('timer()',1000);
-         
-      }
+          var timeText = document.createTextNode(" ");
+          document.getElementById('time').appendChild(timeText);
+           this.func1();
   }
 
-  
+  func1 = () => {
+    
+    this.seconds++; 
+    console.log(this.seconds);
+    console.log(this.seconds);
+    var timeText = document.createTextNode(String(this.seconds));
+    
+    var x = document.getElementById('time');
+    var url = window.location.href; 
+
+    if(url == "http://localhost:4200/puzzle" && x.firstChild) {
+      x.removeChild(x.firstChild);
+      document.getElementById('time').appendChild(timeText);
+    } 
+
+    if(this.irgndav == false && url == "http://localhost:4200/puzzle") {
+      setTimeout(this.func1,1000);
+    } else {
+      this.irgndav = false;
+      this.addHighscore(); 
+    }
+    
+ }
+
   shufflePuzzleParts() {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let counter = puzzleParts.length;
@@ -221,6 +235,8 @@ export class PuzzleComponent implements OnInit {
           solved.id = "solved";
           
           const linkText = document.createTextNode("SOLVED :)");
+          this.irgndav = true; 
+
           solved.appendChild(linkText);
           this.riddle.appendChild(solved); 
         }
@@ -238,7 +254,35 @@ export class PuzzleComponent implements OnInit {
       }
     }
   }
+
+  addHighscore(){
+    console.log("function called");
+    var edittoken = localStorage.getItem('ftoken')
+
+    if(localStorage.getItem('ftoken') != null) {
+      edittoken = edittoken.substring(0, edittoken.length - 1);
+      edittoken = edittoken + ',"zeit":"' + this.seconds + '"}';
+      console.log("------");
+      console.log(edittoken);
+    } else {
+      console.log("Einloggen um Highscore zu speichern");
+      var plslogintext = document.createTextNode("Einloggen um Highscore zu speichern!")
+      let plsloginelement = document.createElement("div");
+      plsloginelement.id = "solved";
+      plsloginelement.appendChild(plslogintext);
+      this.riddle.appendChild(plsloginelement);
+    }
+
+    console.log(edittoken);
+    this.http.post<{ message: string }>('http://localhost:3000/highscore', edittoken, this.httpOptions)
+      .subscribe((responseData) => {
+       console.log(responseData.message);
+      });
+  }
+
 }
+
+
 
 
 
