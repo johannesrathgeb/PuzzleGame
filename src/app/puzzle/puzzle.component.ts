@@ -79,7 +79,7 @@ export class PuzzleComponent implements OnInit {
     this.seconds++; 
     console.log(this.seconds);
     console.log(this.seconds);
-    var timeText = document.createTextNode(String(this.seconds));
+    var timeText = document.createTextNode(this.time_convert(this.seconds));
     
     var x = document.getElementById('time');
     var url = window.location.href; 
@@ -97,6 +97,30 @@ export class PuzzleComponent implements OnInit {
     }
     
  }
+
+  time_convert(num) { 
+  var minutes = Math.floor((num / 60) % 60);  
+  var hours = Math.floor(num / 3600); 
+  var seconds = num % 60;
+  if(hours < 10 && minutes < 10 && seconds < 10) {        
+    return "0" + hours + ":0" + minutes + ":0" + seconds;  
+  } else if(hours < 10 && seconds < 10 && minutes > 9) { 
+    return "0" + hours + ":" + minutes + ":0" + seconds;  
+  } else if(hours < 10 && seconds > 9 && minutes < 10) {
+    return "0" + hours + ":0" + minutes + ":" + seconds;  
+  } else if(hours < 10 && minutes > 9 && seconds > 9) { 
+    return "0" + hours + ":" + minutes + ":" + seconds;  
+  } else if(hours > 9 && minutes < 10 && seconds < 10) {        
+    return hours + ":0" + minutes + ":0" + seconds;  
+  } else if(hours > 9 && seconds < 10 && minutes > 9) { 
+    return hours + ":" + minutes + ":0" + seconds;  
+  } else if(hours > 9 && seconds > 9 && minutes < 10) {
+    return hours + ":0" + minutes + ":" + seconds;  
+  } else { 
+    return hours + ":" + minutes + ":" + seconds;  
+  } 
+}
+
 
   shufflePuzzleParts() {
     const puzzleParts = [1, 2, 3, 4, 5, 6, 7, 8, 9];

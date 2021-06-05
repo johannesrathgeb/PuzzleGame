@@ -226,7 +226,7 @@ app.post('/highscore', (req, res, next) =>{
                 if(100 - zeit > dbData.highscore) {
                     dbData.highscore = "100" - zeit;
                 } else {
-                    console.log("holy shit bist du longsom");
+                    //console.log("holy shit bist du longsom");
                 }
             } else {
                 if( 0 >= dbData.highscore) {
