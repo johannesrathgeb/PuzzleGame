@@ -12,8 +12,8 @@ export class SignupComponent implements OnInit {
 
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
-  password1 = new FormControl('', [Validators.required]);;
-  password2 = new FormControl('', [Validators.required]);;
+  password1 = new FormControl('', [Validators.required, Validators.minLength(8)]);;
+  password2 = new FormControl('', [Validators.required, Validators.minLength(8)]);;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit(form: NgForm){
-     
+
     console.log(localStorage.getItem('ftoken'));
     if(form.value.password != form.value.repeatpassword){
       console.log("Passwörter stimmen nicht überein!");

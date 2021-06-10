@@ -1,7 +1,7 @@
 <form class="example-form"  (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
     <mat-form-field appearance="fill" class ="example-full-width">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" required name="email" ngModel #emailInput ="ngModel">
+      <input matInput placeholder="pat@example.com" type="email" required name="email" ngModel #emailInput ="ngModel">
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 
@@ -39,3 +39,5 @@
 </form>
 
 <div id="msg"></div>
+
+<div id ="errormsg"></div>

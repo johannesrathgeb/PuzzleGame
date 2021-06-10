@@ -63,10 +63,11 @@ export class HighscoreComponent implements OnInit {
 
           for(let i = 0; i < 10; i++) {
             var newDiv = document.createElement("div");
+            var newP = document.createElement("p");
             var obj = dbdata[i];
             var newText = document.createTextNode(i + 1 + ". Username: " + obj.email + " Highscore: " + obj.highscore);
-
-            newDiv.appendChild(newText);
+            newP.appendChild(newText);
+            newDiv.appendChild(newP);
             document.getElementById('msg').appendChild(newDiv); 
           }
 

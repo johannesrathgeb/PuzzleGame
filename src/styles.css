@@ -35,3 +35,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 #riddle img:hover {
 	cursor: pointer;
 }
+
+/*
+p {
+	border: 5px solid black;
+	margin-left: 500px; 
+	margin-right: 500px; 
+  }
+  */
