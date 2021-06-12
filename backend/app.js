@@ -61,8 +61,6 @@ app.get('/allhighscores', (req, res, next) =>{
     
     ftoken = req.query.token
 
-    let returnHighscore;
-    let returnUsername;
     for(let i = 0; i < db.length; i++){
         dbData = db[i];
         btoken = dbData.btoken;
@@ -113,7 +111,7 @@ app.post('/login', (req, res, next) => {
             token: btoken
         });
     }
-    else{
+    else {
         if(userExists == true){
             res.status(200).json({
                 message: 'Falsches Passwort'
@@ -154,9 +152,7 @@ app.post('/signup', (req, res, next) => {
         });
     }
     else{
-        //var crypto = require("crypto");
-        //btoken = crypto.randomBytes(20).toString('hex');
-        //console.log("Token creation " + btoken);
+
         signupData["btoken"] = " ";
         signupData["highscore"] = "0";
         db.push(signupData);
@@ -179,16 +175,13 @@ app.post('/authenticator', (req, res, next) => {
     }
 
     let confirmToken = false;
-    //console.log(ftoken);
     for(let i = 0; i < db.length; i++){
         dbData = db[i];
         if(dbData.btoken == ftoken){
             confirmToken = true;
-            //console.log("jawohl hackerman");
         }
     }
         if(confirmToken == true){
-            //console.log("sameee");
             res.status(200).json({
                 authenticated: true
             });
@@ -226,7 +219,7 @@ app.post('/highscore', (req, res, next) =>{
                 if(100 - zeit > dbData.highscore) {
                     dbData.highscore = "100" - zeit;
                 } else {
-                    //console.log("holy shit bist du longsom");
+
                 }
             } else {
                 if( 0 >= dbData.highscore) {
@@ -235,10 +228,7 @@ app.post('/highscore', (req, res, next) =>{
                 
             }
             
-            //console.log(dbData);
-            //console.log(dbData);
             db[i] = dbData;
-            //console.log(db[i]);
         }
     }
     if(userFound == true){
@@ -255,9 +245,7 @@ app.post('/logout', (req, res, next) => {
         btoken = dbData.btoken;
         if(btoken == ftoken){
             dbData.btoken = " ";
-            //console.log(dbData);
             db[i] = dbData;
-            //console.log(db[i]);
         }
     }
     res.status(200).json({
