@@ -1,13 +1,13 @@
 <form class="example-form"  (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
     <mat-form-field appearance="fill" class ="example-full-width">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" type="email" required name="email" ngModel #emailInput ="ngModel">
+      <input matInput placeholder="pat@example.com" type="email" required name="email" ngModel #emailInput ="ngModel" email="true">
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class ="example-full-width">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" required name="password" ngModel #passwordInput ="ngModel">
+        <input matInput [type]="hide ? 'password' : 'text'" required name="password" ngModel #passwordInput ="ngModel" minlength="8">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
@@ -15,7 +15,7 @@
 
     <mat-form-field appearance="fill" class ="example-full-width">
         <mat-label>Repeat your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" required name="repeatpassword" ngModel #repeatpasswordInput ="ngModel">
+        <input matInput [type]="hide ? 'password' : 'text'" required name="repeatpassword" ngModel #repeatpasswordInput ="ngModel" minlength="8">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
