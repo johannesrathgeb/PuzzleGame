@@ -58,18 +58,24 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit(form: NgForm){
-
-    console.log(localStorage.getItem('ftoken'));
-    if(form.value.password != form.value.repeatpassword){
-      console.log("Passwörter stimmen nicht überein!");
+    if(form.invalid){
+      console.log("Fehler");
+      console.log(form.hasError);
     }
     else{
-      this.http.post<{ message: string }>('http://localhost:3000/signup', form.value, this.httpOptions)
-      .subscribe((responseData) => {
-       document.getElementById('msg').innerHTML = responseData.message;
-      });
-      console.log("SignUp successfull!");
+      console.log(localStorage.getItem('ftoken'));
+      if(form.value.password != form.value.repeatpassword){
+        console.log("Passwörter stimmen nicht überein!");
+      }
+      else{
+        this.http.post<{ message: string }>('http://localhost:3000/signup', form.value, this.httpOptions)
+        .subscribe((responseData) => {
+         document.getElementById('msg').innerHTML = responseData.message;
+        });
+        console.log("SignUp successfull!");
+      }
     }
+
   }
 
   getErrorMessage() {

@@ -35,7 +35,7 @@
         <mat-label>Adresse</mat-label>
         <textarea matInput name="address"></textarea>
     </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Sign Up</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.$invalid">Sign Up</button>
 </form>
 
 <div id="msg"></div>
