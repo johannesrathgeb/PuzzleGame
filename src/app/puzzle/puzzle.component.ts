@@ -92,7 +92,7 @@ export class PuzzleComponent implements OnInit {
     if(this.irgndav == false && url == "http://localhost:4200/puzzle") {
       setTimeout(this.func1,1000);
     } else {
-      this.irgndav = false;
+      //this.irgndav = false;
       this.addHighscore(); 
     }
     
@@ -280,6 +280,12 @@ export class PuzzleComponent implements OnInit {
   }
 
   addHighscore(){
+    
+    if(this.irgndav == false) {
+      return; 
+    }
+    
+    this.irgndav = false; 
     console.log("function called");
     var edittoken = localStorage.getItem('ftoken')
 

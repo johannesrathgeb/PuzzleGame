@@ -15,7 +15,6 @@ export class AppComponent {
   constructor(private http: HttpClient) { }
 
   logout(){
-    console.log("Teeeeeeest")
     this.http.post<{ message: string }>('http://localhost:3000/logout', localStorage.getItem('ftoken'), this.httpOptions)
       .subscribe((responseData) => {
        console.log(responseData.message);
@@ -38,6 +37,15 @@ export class AppComponent {
 
 
   ngOnInit(): void {
+    var bild = document.createElement("img");
+
+    bild.setAttribute("src", "assets/img/Logo.png");
+    bild.setAttribute("id", "bildID");
+
+    var img = document.getElementById("img");
+    img.appendChild(bild);
+
+    
     console.log("app page gewechselt");
     this.tokenAuthenticator(); 
   }

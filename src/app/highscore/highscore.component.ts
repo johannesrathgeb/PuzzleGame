@@ -29,16 +29,6 @@ export class HighscoreComponent implements OnInit {
       });
   }
 
-/*
-  addHighscore(){
-    console.log("function called");
-    this.http.post<{ message: string }>('http://localhost:3000/highscore', localStorage.getItem('ftoken'), this.httpOptions)
-      .subscribe((responseData) => {
-       console.log(responseData.message);
-      });
-  }
-  */
-
   getAllHighscores(){
 
     if(localStorage.getItem("ftoken") != null) {
@@ -72,22 +62,6 @@ export class HighscoreComponent implements OnInit {
           }
 
         }
-        /*
-        var x = document.getElementById('msg');
-        if(x.firstChild) {
-          x.removeChild(x.firstChild);
-        }   
-        var newDiv = document.createElement("div");
-        var newText = document.createTextNode("Username: " + responseData.username + " Highscore: " + responseData.highscore);
-
-        newDiv.appendChild(newText);
-        document.getElementById('msg').appendChild(newDiv); 
-        */
       });
   }
 }
-
-
-
-//Stringify: JS Object-> JSON String
-//Parse: JSON String-> JS Object

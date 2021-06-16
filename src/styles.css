@@ -21,7 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	width: 500px;
 	height: 500px;
 	left: 50%;
-	top:50%;
+	top:60%;
 	margin-left: -250px;
 	margin-top: -250px;
 }
@@ -36,10 +36,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 	cursor: pointer;
 }
 
-/*
-p {
-	border: 5px solid black;
-	margin-left: 500px; 
-	margin-right: 500px; 
-  }
-  */
+#bildID {
+	width: 90px; 
+	height: auto; 
+	float: left; 
+}

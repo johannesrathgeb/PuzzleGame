@@ -21,11 +21,10 @@ var db = [
     {email: 'aram@bestgamemode.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '45'},
     {email: 'removeyuumi@markyetter.at',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '87'},
     {email: 'summersplash@hinigsbett.it',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '13'},
-    {email: 'uweuweosas@saugmeinboden.de',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '69'},
+    {email: 'uweuweosas@saugmeinboden.de',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '68'},
     {email: 'legalizesibis@inaustria.de',password: '11111111',repeatpassword: '11111111',btoken: ' ',highscore: '69'}
 ];
 var btoken = "";
-//var currentBtoken ="";
 
 //SIMPLE GET
 app.get('/', (req, res, next) => {
@@ -213,7 +212,6 @@ app.post('/highscore', (req, res, next) =>{
 
         if(btoken == ftoken){
             userFound = true;
-            console.log("öööööööööö");
             console.log(zeit);
             if(zeit <= 100) {
                 if(100 - zeit > dbData.highscore) {
