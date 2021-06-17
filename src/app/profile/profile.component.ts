@@ -33,18 +33,14 @@ export class ProfileComponent implements OnInit {
 
     if(localStorage.getItem("ftoken") != null) {
       var edittoken = localStorage.getItem("ftoken");
-      console.log("llllllllllllllll");
       console.log(edittoken);
       var cuttoken = edittoken.substring(11);
-      console.log("rrrrrrrrrrrrr");
       console.log(cuttoken);
       var cuttoken2 = cuttoken.substring(0, cuttoken.length - 1);
       var cuttoken2 = cuttoken.substring(0, cuttoken2.length - 1);
-      console.log("|||||||||||");
       console.log(cuttoken2);
     }
 
-    console.log("function called");
     this.http.get<{highscore, username}>('http://localhost:3000/highscore?token=' + cuttoken2, this.httpOptions)
       .subscribe((responseData) => {
         console.log(responseData.highscore);

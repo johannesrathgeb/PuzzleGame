@@ -77,8 +77,6 @@ export class PuzzleComponent implements OnInit {
   func1 = () => {
     
     this.seconds++; 
-    console.log(this.seconds);
-    console.log(this.seconds);
     var timeText = document.createTextNode(this.time_convert(this.seconds));
     
     var x = document.getElementById('time');
@@ -92,7 +90,6 @@ export class PuzzleComponent implements OnInit {
     if(this.irgndav == false && url == "http://localhost:4200/puzzle") {
       setTimeout(this.func1,1000);
     } else {
-      //this.irgndav = false;
       this.addHighscore(); 
     }
     
@@ -286,14 +283,11 @@ export class PuzzleComponent implements OnInit {
     }
     
     this.irgndav = false; 
-    console.log("function called");
     var edittoken = localStorage.getItem('ftoken')
 
     if(localStorage.getItem('ftoken') != null) {
       edittoken = edittoken.substring(0, edittoken.length - 1);
       edittoken = edittoken + ',"zeit":"' + this.seconds + '"}';
-      console.log("------");
-      console.log(edittoken);
     } else {
       console.log("Einloggen um Highscore zu speichern");
       var plslogintext = document.createTextNode("Einloggen um Highscore zu speichern!")
